@@ -34,6 +34,7 @@ BAT_FILES = [
     'kuresampler_K_child.bat',
     'kuresampler_R_child.bat',
     'reinstall_torch.bat',
+    'start_server.bat',
 ]
 
 CS_FILES = [
