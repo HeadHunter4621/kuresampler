@@ -66,10 +66,6 @@ async def api_load_models(request: Request):
 @app.post('/resampler')
 async def api_resampler(request: Request):
     """Resampler を実行する。"""
-    # global current_task_create_labels
-    # global vocoder_model
-    # global vocoder_config
-    # global vocoder_in_scaler
     print(await request.body())
     body = await request.body()
     # args = str(urllib.parse.unquote(body)).split('')
