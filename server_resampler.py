@@ -65,10 +65,10 @@ async def api_load_models(request: Request):
 @app.post("/resampler")
 async def api_resampler(request:Request):
     """Resampler を実行する。"""
-    global current_task_create_labels
-    global vocoder_model
-    global vocoder_config
-    global vocoder_in_scaler
+    # global current_task_create_labels
+    # global vocoder_model
+    # global vocoder_config
+    # global vocoder_in_scaler
     print(await request.body())
     body = await request.body()
     # args = str(urllib.parse.unquote(body)).split('')
@@ -120,5 +120,5 @@ async def has_current_task(current_task):
 
 if __name__ == '__main__':
     # サーバー起動
-    uvicorn.run(app,host="0.0.0.0", port=55903, log_level="debug")
+    uvicorn.run(app, host='127.0.0.1', port=55903, log_level='debug')
     logging.debug('sys.argv: %s', sys.argv)
