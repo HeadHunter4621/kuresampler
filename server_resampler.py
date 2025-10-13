@@ -6,6 +6,7 @@ LEIRH (https://github.com/bullets1234) さんが作ってくれました。
 """
 
 import asyncio
+import contextlib
 import logging
 import sys
 import urllib.parse
@@ -19,6 +20,7 @@ from fastapi.concurrency import run_in_threadpool
 script_dir = Path(__file__).parent
 if str(script_dir) not in sys.path:
     sys.path.insert(0, str(script_dir))
+
 
 from resampler import main_resampler  # noqa: E402
 from util import get_device, load_vocoder_model  # noqa: E402
@@ -89,7 +91,13 @@ async def api_resampler(request:Request):
     #     ""                          # pitchbend
     # ]
 
-    result = await run_in_threadpool(main_resampler,arg_list=split_argument,vocoder_model=vocoder_model,vocoder_config=vocoder_config,vocoder_in_scaler=vocoder_in_scaler)
+    _ = await run_in_threadpool(
+        main_resampler,
+        arg_list=split_argument,
+        vocoder_model=vocoder_model,
+        vocoder_config=vocoder_config,
+        vocoder_in_scaler=vocoder_in_scaler,
+    )
 
 
 # from hifisampler github:
@@ -107,10 +115,8 @@ async def has_current_task(current_task):
     if current_task is not None and not current_task.done():
         print("Cancelled previous task.")
         current_task.cancel()
-        try:
+        with contextlib.suppress(asyncio.CancelledError):
             await current_task
-        except asyncio.CancelledError:
-            pass
 
 if __name__ == '__main__':
     # サーバー起動
