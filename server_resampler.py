@@ -106,8 +106,6 @@ def split_arguments(input_string: str):
     # return [first_file + '.wav', second_file] + otherargs
 
 
-
-
 if __name__ == '__main__':
     # サーバー起動
     logging.debug('sys.argv: %s', sys.argv)
