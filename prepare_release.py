@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2025 oatsu
-"""
-kuresampler の配布準備を行う。
-"""
+"""kuresampler の配布準備を行う。"""
 
 import shutil
 import subprocess
@@ -53,9 +51,7 @@ OTHER_FILES = [
 
 
 def install_torch_cpu():
-    """
-    CPU版のpytorchをインストールする。
-    """
+    """CPU版のpytorchをインストールする。"""
     python_exe = str(PYTHON_DIR / 'python.exe')
     uninstall_command = [python_exe, '-m', 'pip', 'uninstall', '-y', 'torch', 'torchvision', 'torchaudio', '--no-input']  # fmt: skip
     subprocess.run(uninstall_command, check=True)  # noqa: S603
@@ -64,9 +60,7 @@ def install_torch_cpu():
 
 
 def remove_cache_files(path_dir: Path):
-    """
-    キャッシュファイルを削除する。
-    """
+    """キャッシュファイルを削除する。"""
     # キャッシュフォルダを再帰的に検索
     # __pycache__フォルダを再帰的に検索
     dirs_to_remove = list(path_dir.rglob('__pycache__'))
