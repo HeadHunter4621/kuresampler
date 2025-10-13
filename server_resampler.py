@@ -65,28 +65,32 @@ async def api_load_models(request: Request):
 
 @app.post('/resampler')
 async def api_resampler(request: Request):
-    """Resampler を実行する。"""
+    r"""Resampler を実行する。
+
+    resampler引数の例:
+    <input_file> <output_file> <tone> <velocity> <flags> <offset> <length> <consonant> <cutoff> <volume> <modulation> <tempo> <pitchbends...>
+
+    args = [
+        'C:\\Users\\XXXX\\あ.wav',  # input_path
+        './aaaa.wav',               # output_path
+        'A4',                       # target_tone
+        '107',                      # velocity (整数値)
+        '',                         # flags
+        '20',                       # offset (from '20@168+217.318')
+        '217.318',                  # target_ms (length)
+        '224.7583',                 # fixed_ms (consonant)
+        '3197.114',                 # end_ms (cutoff)
+        '300',                      # volume
+        '0',                        # modulation (整数値)
+        '!120',                     # tempo (デフォルト)
+        ''                          # pitchbend
+    ]
+
+    """
     print(await request.body())
     body = await request.body()
     # args = str(urllib.parse.unquote(body)).split('')
     split_argument = split_arguments(str(urllib.parse.unquote(body)))
-    # UTAU resampler引数の正しい順序:
-    # <input_file> <output_file> <tone> <velocity> <flags> <offset> <length> <consonant> <cutoff> <volume> <modulation> <tempo> <pitchbends...>
-    # args = [
-    #     'C:\\Users\\XXXX\\あ.wav',  # input_path
-    #     './aaaa.wav',               # output_path
-    #     'A4',                       # target_tone
-    #     '107',                      # velocity (整数値)
-    #     '',                         # flags
-    #     '20',                       # offset (from '20@168+217.318')
-    #     '217.318',                  # target_ms (length)
-    #     '224.7583',                 # fixed_ms (consonant)
-    #     '3197.114',                 # end_ms (cutoff)
-    #     '300',                      # volume
-    #     '0',                        # modulation (整数値)
-    #     '!120',                     # tempo (デフォルト)
-    #     ''                          # pitchbend
-    # ]
 
     _ = await run_in_threadpool(
         main_resampler,
@@ -95,6 +99,7 @@ async def api_resampler(request: Request):
         vocoder_config=vocoder_config,
         vocoder_in_scaler=vocoder_in_scaler,
     )
+    return {'message': 'resampler done'}
 
 
 # from hifisampler github:
