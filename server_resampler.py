@@ -46,7 +46,7 @@ async def api_load_models(request: Request):
     global vocoder_config
     global vocoder_in_scaler
 
-    print(await request.body())
+    # print(await request.body())
     body = await request.body()
     args = str(urllib.parse.unquote(body))
 
