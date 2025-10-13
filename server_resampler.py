@@ -101,7 +101,7 @@ async def api_resampler(request: Request):
     return {'message': 'resampler done'}
 
 
-# from hifisampler github:
+# from hifisampler GitHub:
 def split_arguments(input_string: str):
     """文字列扱いのコマンドライン引数を分割する"""
     return input_string.split(',')
