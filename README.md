@@ -89,3 +89,9 @@ LEIRH (https://x.com/LEIRHds)
 - g フラグや B フラグ適用時にWAV合成できない不具合を修正 (同梱のPyRwuを改造)
 - g フラグのフォルマントシフトのスケールを log から mel に変更 (同梱のPyRwuを改造)
 - reinstall_torch.bat を追加
+
+### 0.1.0
+
+- FastAPI を使用した サーバー & クライアントモードを追加。これにより、レンダリング高速化。
+  - resampler として kuresampler_K_Client.exe / kuresampler_R_Client.exe を指定して使用。
+- OpenUtau 対応
