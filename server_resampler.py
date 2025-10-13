@@ -97,8 +97,10 @@ async def api_resampler(request: Request):
         vocoder_config=vocoder_config,
         vocoder_in_scaler=vocoder_in_scaler,
     )
-    return {'message': 'resampler done'}
+    )
+    )
 
+    return {"message": "resampler done"}
 
 # from hifisampler GitHub:
 def split_arguments(input_string: str):
