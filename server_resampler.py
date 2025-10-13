@@ -112,13 +112,6 @@ def split_arguments(input_string: str):
     # return [first_file + '.wav', second_file] + otherargs
 
 
-async def has_current_task(current_task):
-    """現在実行中のタスクがあればキャンセルする。"""
-    if current_task is not None and not current_task.done():
-        print('Cancelled previous task.')
-        current_task.cancel()
-        with contextlib.suppress(asyncio.CancelledError):
-            await current_task
 
 
 if __name__ == '__main__':
