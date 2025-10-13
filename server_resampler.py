@@ -60,10 +60,10 @@ async def api_load_models(request: Request):
         load_vocoder_model, args, get_device()
     )
 
-    return {"message": "load_models done"}
+    return {'message': 'load_models done'}
 
-@app.post("/resampler")
-async def api_resampler(request:Request):
+@app.post('/resampler')
+async def api_resampler(request: Request):
     """Resampler を実行する。"""
     # global current_task_create_labels
     # global vocoder_model
@@ -76,19 +76,19 @@ async def api_resampler(request:Request):
     # UTAU resampler引数の正しい順序:
     # <input_file> <output_file> <tone> <velocity> <flags> <offset> <length> <consonant> <cutoff> <volume> <modulation> <tempo> <pitchbends...>
     # args = [
-    #     "C:\\Users\\XXXX\\あ.wav",  # input_path
-    #     "./aaaa.wav",               # output_path
-    #     "A4",                       # target_tone
-    #     "107",                      # velocity (整数値)
-    #     "",                         # flags
-    #     "20",                       # offset (from "20@168+217.318")
-    #     "217.318",                  # target_ms (length)
-    #     "224.7583",                 # fixed_ms (consonant)
-    #     "3197.114",                 # end_ms (cutoff)
-    #     "300",                      # volume
-    #     "0",                        # modulation (整数値)
-    #     "!120",                     # tempo (デフォルト)
-    #     ""                          # pitchbend
+    #     'C:\\Users\\XXXX\\あ.wav',  # input_path
+    #     './aaaa.wav',               # output_path
+    #     'A4',                       # target_tone
+    #     '107',                      # velocity (整数値)
+    #     '',                         # flags
+    #     '20',                       # offset (from '20@168+217.318')
+    #     '217.318',                  # target_ms (length)
+    #     '224.7583',                 # fixed_ms (consonant)
+    #     '3197.114',                 # end_ms (cutoff)
+    #     '300',                      # volume
+    #     '0',                        # modulation (整数値)
+    #     '!120',                     # tempo (デフォルト)
+    #     ''                          # pitchbend
     # ]
 
     _ = await run_in_threadpool(
@@ -107,13 +107,13 @@ def split_arguments(input_string: str):
     # otherargs = input_string.split(' ')[-12:]
     # file_path_strings = ' '.join(input_string.split(' ')[:-12])
     # first_file, second_file = file_path_strings.split('.wav ')
-    # return [first_file + ".wav", second_file] + otherargs
+    # return [first_file + '.wav', second_file] + otherargs
 
 
 async def has_current_task(current_task):
     """現在実行中のタスクがあればキャンセルする。"""
     if current_task is not None and not current_task.done():
-        print("Cancelled previous task.")
+        print('Cancelled previous task.')
         current_task.cancel()
         with contextlib.suppress(asyncio.CancelledError):
             await current_task
