@@ -77,7 +77,7 @@ async def api_resampler(request: Request):
         '300',                      # volume
         '0',                        # modulation (整数値)
         '!120',                     # tempo (デフォルト)
-        ''                          # pitchbend
+        ''                          # pitchbend (ピッチベンド値)
     ]
 
     """
