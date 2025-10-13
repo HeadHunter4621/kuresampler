@@ -31,7 +31,6 @@ vocoder_model = None  # グローバル変数
 vocoder_config = None  # グローバル変数
 vocoder_in_scaler = None  # グローバル変数
 vocoder_model_dir = None  # グローバル変数
-labels = None  # グローバル変数
 
 
 @app.get('/health')
