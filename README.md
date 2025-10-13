@@ -2,15 +2,26 @@
 WORLD と ニューラルボコーダーを利用した UTAU エンジンです。自然なクロスフェードと高品質な出音の両立を目指します。
 
 ## 使い方
-
-- UTAU エンジンの resampler の代わりに下記のいずれかを指定してください。
-  - **kuresampler_K.exe**
-  - **kuresampler_R.exe**
-  - **kuresampler_fast_K.exe**
-  - **kuresampler_fast_R.exe**
-- fast が付くエンジンは高速ですが高負荷です。
-- OpenUtau は未対応です。
+### サーバー & クライアントモード (推奨)
+- kuresampler v0.1.0 で追加されたモードです。サーバー・クライアント方式により高速に動作します。
+- **UTAU, OpenUtau 両対応です。**
+- resampler として使用可能です。wavtool は通常のものを使用してください。
+- resampler として下記のいずれかを指定してください。
+  - **kuresampler_K_Client.exe**
+  - **kuresampler_R_Client.exe**
 - CUDA対応環境の場合、**reinstall_torch.bat** を一度実行すればGPUを使って高速レンダリングできるようになります。
+
+### スタンドアロンモード (非推奨)
+- kuresampler v0.0.1 以前と同様の動作をします。
+- OpenUtau 非対応です。
+- resampler としてのみ使用可能です。wavtool は通常のものを使用してください。
+- resampler として下記のいずれかを指定してください。
+  - kuresampler_K.exe
+  - kuresampler_R.exe
+  - kuresampler_fast_K.exe
+  - kuresampler_fast_R.exe
+- fast が付くエンジンは高速ですが高負荷です。
+- CUDA対応環境の場合、reinstall_torch.bat を一度実行すればGPUを使って高速レンダリングできるようになります。
 
 ## エンジン比較
 
@@ -60,6 +71,11 @@ WORLD と ニューラルボコーダーを利用した UTAU エンジンです�
 | vf       | -500 ～ 500   | default:0      | 疑似エッジ。エッジがかかる長さを5ms単位で指定。              |
 | vfw      | 0 ～ 300      | default:100    | 疑似エッジの1回あたりの長さ（%指定）。                       |
 | vfp      | 0 ～ 100      | default:20     | 疑似エッジの1回あたりの無音の長さ（%指定）。                 |
+
+
+## Special Thanks
+
+LEIRH (https://x.com/LEIRHds)
 
 ## 更新履歴
 
