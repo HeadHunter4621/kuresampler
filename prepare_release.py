@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2025 oatsu
+# ruff: noqa: T201, S101
 """kuresampler の配布準備を行う。"""
 
 import shutil
@@ -25,6 +26,8 @@ EXE_FILES = [
     'kuresampler_R.exe',
     'kuresampler_fast_K.exe',
     'kuresampler_fast_R.exe',
+    'kuresampler_K_Client.exe',
+    'kuresampler_R_Client.exe',
 ]
 
 BAT_FILES = [
@@ -38,9 +41,10 @@ CS_FILES = [
 ]
 
 PY_FILES = [
-    'resampler.py',
     'convert.py',
     'util.py',
+    'resampler.py',
+    'server_resampler.py',
 ]
 
 OTHER_FILES = [
@@ -49,6 +53,12 @@ OTHER_FILES = [
     'requirements.txt',
 ]
 
+UPDATE_REQUIREMENTS = [
+    'git+https://github.com/oatsu-gh/nnsvs@kuresampler',
+    'git+https://github.com/oatsu-gh/PyRwu@kuresampler',
+    'git+https://github.com/oatsu-gh/ParallelWaveGAN@kuresampler',
+    'git+https://github.com/oatsu-gh/HN-UnifiedSourceFilterGAN@kuresampler',
+]
 
 def install_torch_cpu():
     """CPU版のpytorchをインストールする。"""
@@ -57,6 +67,15 @@ def install_torch_cpu():
     subprocess.run(uninstall_command, check=True)  # noqa: S603
     install_command = [python_exe, '-m', 'pip', 'install', 'torch', 'torchvision', 'torchaudio', '--no-warn-script-location']  # fmt: skip
     subprocess.run(install_command, check=True)  # noqa: S603
+
+def upgrade_packages():
+    """必要なパッケージをインストール・アップグレードする。"""
+    python_exe = str(PYTHON_DIR / 'python.exe')
+    command_head = [python_exe, '-m', 'pip', 'install', '--upgrade']
+    for package in UPDATE_REQUIREMENTS:
+        command = command_head + [package, '--no-warn-script-location']
+        print(f'Upgrading package: {package}')
+        subprocess.run(command, check=True, shell=False)  # noqa: S603
 
 
 def remove_cache_files(path_dir: Path):
@@ -100,6 +119,11 @@ def prepare_release(version: str):
     # CPU版のpytorchをインストールする
     print('Installing CPU version of pytorch...')
     install_torch_cpu()
+    print('──────────────────────────────────────────────')
+
+    # 必要なパッケージをインストール・アップグレードする
+    print('Upgrading required packages...')
+    upgrade_packages()
     print('──────────────────────────────────────────────')
 
     # Pythonフォルダ内の __pycache__ を削除する
