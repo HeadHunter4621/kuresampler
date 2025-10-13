@@ -62,6 +62,7 @@ async def api_load_models(request: Request):
 
     return {'message': 'load_models done'}
 
+
 @app.post('/resampler')
 async def api_resampler(request: Request):
     """Resampler を実行する。"""
@@ -117,6 +118,7 @@ async def has_current_task(current_task):
         current_task.cancel()
         with contextlib.suppress(asyncio.CancelledError):
             await current_task
+
 
 if __name__ == '__main__':
     # サーバー起動
