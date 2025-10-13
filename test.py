@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # Copyright (c) 2025 oatsu
-"""
-PyWorld で WAV ファイルを読み取って、
-PyRwu の形式と NNSVS の形式に変換してみる。
+# ruff: noqa: T201, S101
+"""PyWorld で WAV ファイルを読み取って、PyRwu の形式と NNSVS の形式に変換してみる。
 
 相互変換できるか調査して kuresampler の開発につなげる。
 """
@@ -160,11 +159,13 @@ def test_performance(path_wav_in: Path | str = TEST_WAV_IN, n_iter: int = TEST_N
 
     def measure_time(_func, _n_iter, *_args, **_kwargs) -> Any:
         """関数の実行速度を評価する。
+
         Args:
             func: 評価したい関数
             n_iter: 実行回数
             *args: 関数に渡す位置引数
             **kwargs: 関数に渡すキーワード引数
+
         """
         print('---------------------------------------------')
         print(f'{_func.__name__} (x{_n_iter})')
@@ -230,6 +231,7 @@ def test_resampler_and_wavtool(
         path_ust_in: UST ファイルのパス
         path_wav_out: 出力する WAV ファイルのパス
         model_dir: ニューラルボコーダーモデルのディレクトリ
+
     """
     logger = setup_logger()
     logger.setLevel('DEBUG')
