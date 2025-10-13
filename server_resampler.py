@@ -99,10 +99,6 @@ async def api_resampler(request: Request):
 def split_arguments(input_string: str):
     """文字列扱いのコマンドライン引数を分割する"""
     return input_string.split(',')
-    # otherargs = input_string.split(' ')[-12:]
-    # file_path_strings = ' '.join(input_string.split(' ')[:-12])
-    # first_file, second_file = file_path_strings.split('.wav ')
-    # return [first_file + '.wav', second_file] + otherargs
 
 
 if __name__ == '__main__':
