@@ -1,26 +1,27 @@
+# ruff: noqa: T201
+"""kuresampler のうち resampler 部分を FastAPI サーバー化したもの。
+
+LEIRH (https://github.com/bullets1234) さんが作ってくれました。
+
+"""
+
+import asyncio
+import logging
 import sys
+import urllib.parse
 from pathlib import Path
+
+import uvicorn
+from fastapi import FastAPI, Request
+from fastapi.concurrency import run_in_threadpool
 
 # スクリプトが存在するディレクトリを sys.path に追加
 script_dir = Path(__file__).parent
 if str(script_dir) not in sys.path:
     sys.path.insert(0, str(script_dir))
 
-import logging
-import sys
-
-from fastapi import FastAPI ,Request
-from fastapi.concurrency import run_in_threadpool
-import uvicorn
-import urllib.parse
-import asyncio
-
-from resampler import main_resampler
-from util import load_vocoder_model , get_device
-
-
-import nnsvs  # pylint: disable=import-error
-from nnsvs.svs import SPSVS
+from resampler import main_resampler  # noqa: E402
+from util import get_device, load_vocoder_model  # noqa: E402
 
 semaphore = asyncio.Semaphore(5)
 
@@ -28,20 +29,23 @@ app = FastAPI()
 vocoder_model = None  # グローバル変数
 vocoder_config = None  # グローバル変数
 vocoder_in_scaler = None  # グローバル変数
-vocoder_model_dir = None # グローバル変数
-labels = None # グローバル変数
+vocoder_model_dir = None  # グローバル変数
+labels = None  # グローバル変数
 
-@app.get("/health")
+
+@app.get('/health')
 async def health_check():
-    return {"message": "Health Check OK - Server is running"}
+    """Server の起動状態をチェックする。"""
+    return {'message': 'Health Check OK - Server is running'}
 
 
-@app.post("/load_models")
-async def api_load_models(request:Request):
+@app.post('/load_models')
+async def api_load_models(request: Request):
+    """モデルを読みこむ。"""
     # do_parallel(ust_path, wavout_path)
     # global current_task_load_models
     # await has_current_task(current_task_load_models)
-    
+
     global vocoder_model
     global vocoder_config
     global vocoder_in_scaler
@@ -50,12 +54,15 @@ async def api_load_models(request:Request):
     body = await request.body()
     args = str(urllib.parse.unquote(body))
 
-    vocoder_model,vocoder_in_scaler,vocoder_config = await run_in_threadpool(load_vocoder_model,args,get_device())
+    vocoder_model, vocoder_in_scaler, vocoder_config = await run_in_threadpool(
+        load_vocoder_model, args, get_device()
+    )
 
     return {"message": "load_models done"}
 
 @app.post("/resampler")
 async def api_resampler(request:Request):
+    """Resampler を実行する。"""
     global current_task_create_labels
     global vocoder_model
     global vocoder_config
@@ -87,13 +94,16 @@ async def api_resampler(request:Request):
 
 # from hifisampler github:
 def split_arguments(input_string: str):
-    otherargs = input_string.split(' ')[-12:]
-    file_path_strings = ' '.join(input_string.split(' ')[:-12])
-    first_file, second_file = file_path_strings.split('.wav ')
-    return [first_file + ".wav", second_file] + otherargs
+    """文字列扱いのコマンドライン引数を分割する"""
+    return input_string.split(',')
+    # otherargs = input_string.split(' ')[-12:]
+    # file_path_strings = ' '.join(input_string.split(' ')[:-12])
+    # first_file, second_file = file_path_strings.split('.wav ')
+    # return [first_file + ".wav", second_file] + otherargs
 
 
 async def has_current_task(current_task):
+    """現在実行中のタスクがあればキャンセルする。"""
     if current_task is not None and not current_task.done():
         print("Cancelled previous task.")
         current_task.cancel()
