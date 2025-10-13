@@ -25,7 +25,6 @@ if str(script_dir) not in sys.path:
 from resampler import main_resampler  # noqa: E402
 from util import get_device, load_vocoder_model  # noqa: E402
 
-semaphore = asyncio.Semaphore(5)
 
 app = FastAPI()
 vocoder_model = None  # グローバル変数
