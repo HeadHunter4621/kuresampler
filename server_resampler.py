@@ -5,8 +5,6 @@ LEIRH (https://github.com/bullets1234) さんが作ってくれました。
 
 """
 
-import asyncio
-import contextlib
 import logging
 import sys
 import urllib.parse
@@ -24,7 +22,6 @@ if str(script_dir) not in sys.path:
 
 from resampler import main_resampler  # noqa: E402
 from util import get_device, load_vocoder_model  # noqa: E402
-
 
 app = FastAPI()
 vocoder_model = None  # グローバル変数
@@ -96,10 +93,8 @@ async def api_resampler(request: Request):
         vocoder_config=vocoder_config,
         vocoder_in_scaler=vocoder_in_scaler,
     )
-    )
-    )
 
-    return {"message": "resampler done"}
+    return {'message': 'resampler done'}
 
 # from hifisampler GitHub:
 def split_arguments(input_string: str):
