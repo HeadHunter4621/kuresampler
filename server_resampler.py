@@ -89,7 +89,6 @@ async def api_resampler(request: Request):
     """
     print(await request.body())
     body = await request.body()
-    # args = str(urllib.parse.unquote(body)).split('')
     split_argument = split_arguments(str(urllib.parse.unquote(body)))
 
     _ = await run_in_threadpool(
