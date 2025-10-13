@@ -41,7 +41,6 @@ async def api_load_models(request: Request):
     """モデルを読みこむ。"""
     # do_parallel(ust_path, wavout_path)
     # global current_task_load_models
-    # await has_current_task(current_task_load_models)
 
     global vocoder_model
     global vocoder_config
