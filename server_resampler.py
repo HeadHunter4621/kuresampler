@@ -110,5 +110,5 @@ def split_arguments(input_string: str):
 
 if __name__ == '__main__':
     # サーバー起動
-    uvicorn.run(app, host='127.0.0.1', port=55903, log_level='debug')
     logging.debug('sys.argv: %s', sys.argv)
+    uvicorn.run(app, host='127.0.0.1', port=55903, log_level='debug')
