@@ -58,6 +58,8 @@ UPDATE_REQUIREMENTS = [
     'git+https://github.com/oatsu-gh/PyRwu@kuresampler',
     'git+https://github.com/oatsu-gh/ParallelWaveGAN@kuresampler',
     'git+https://github.com/oatsu-gh/HN-UnifiedSourceFilterGAN@kuresampler',
+    'fastapi[standard]',
+    'uvicorn[standard]',
 ]
 
 def install_torch_cpu():

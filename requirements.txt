@@ -10,4 +10,6 @@ omegaconf
 light-the-torch
 colored-traceback
 colorlog
+fastapi
+uvicorn
 # torch should be installed manually according to the environment
