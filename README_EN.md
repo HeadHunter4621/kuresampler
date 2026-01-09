@@ -58,7 +58,7 @@ WORLD is a UTAU engine utilizing a neural vocoder. It aims to achieve both natur
 - When used as resampler
   - Pro: Produces natural-sounding voice for parametric vocal synthesis.
   - Con: Slow rendering compared to typical UTAU engines.
-- When used as resampler & wavtool (not yet implimented)
+- When used as resampler & wavtool (not yet implemented)
   - Pro: Produces natural-sounding voice for parametric vocal synthesis.
   - Pro: Relatively natural synthesis even with crossfades where the original pitch is different.
   - Con: Slow rendering compared to typical UTAU engines.
