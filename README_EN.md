@@ -14,8 +14,8 @@ WORLD is a UTAU engine utilizing a neural vocoder. It aims to achieve both natur
 - On CUDA-enabled systems, running `reinstall_torch.bat` enables GPU-accelerated rendering.
 
 ### Standalone Mode (Deprecated)
-- Operates identically to kuresampler v0.0.1 and earlier。
-- Not compatible with OpenUtau。
+- Operates identically to kuresampler v0.0.1 and earlier.
+- Not compatible with OpenUtau.
 - Used as a resampler with standard wavtool.
 - Specify one of the following as the resampler:
   - `kuresampler_K.exe`
