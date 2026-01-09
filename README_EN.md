@@ -4,7 +4,7 @@ WORLD is a UTAU engine utilizing a neural vocoder. It aims to achieve both natur
 [JA (Original) README](https://github.com/oatsu-gh/kuresampler/blob/main/README.md)
 
 ## Usage
-### Server/Client Mode (Recomended)
+### Server/Client Mode (Recommended)
 - Added in kuresampler v0.1.0. Higher-speed server-client architecture
 - **Compatible with UTAU & OpenUtau**
 - Used as a resampler with standard wavtool.
