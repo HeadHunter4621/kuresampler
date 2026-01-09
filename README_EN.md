@@ -69,7 +69,7 @@ WORLD is a UTAU engine utilizing a neural vocoder. It aims to achieve both natur
 
 ### Flags
 
-- Flags other than `B`, `g`, `e`, & `l` have onot yet been tested
+- Flags other than `B`, `g`, `e`, & `l` have not yet been tested
 - The default stretching method is stretch mode (`e`). To change to loop mode, use the loop flag (`l`).
 
 | Flag     | Value Range  | Default        | Description                                                                                                                                                                           |
